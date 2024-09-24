@@ -69,7 +69,7 @@ python client.py
 - Client: Captures webcam images using OpenCV and sends them as JPEG-encoded files to the Flask server via HTTP POST requests. The client also listens for responses from the server to control the gate.
 - Server: Processes the images to detect faces using face_recognition and license plates using Google Vision. If a recognized face or license plate is found, the server sends a command back to the client to open the gate.
 ### License Plate Detection
-Google Vision API is used to perform text detection on images to extract license plate numbers. Text is filtered to keep only alphanumeric characters.
+Google Vision API is used to perform text detection on images to extract license plate numbers. Text is filtered to keep only alphanumeric characters that are enclosed in a rectangular/squared field.
 ### Gate Control
 The Raspberry Pi client controls a servomotor via its GPIO pins. When the server detects a known face or license plate, the client receives a signal and activates the motor to open the gate.
 ### To-Do
