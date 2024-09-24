@@ -43,7 +43,15 @@ SmartGate is a client-server application that automates gate control by recogniz
    - Place images of known faces in the known_faces folder. Supported formats: .jpg, .png, .jpeg.
 5. Set up the Raspberry Pi for GPIO control:
    - Install the necessary libraries for GPIO control (RPi.GPIO or pigpio), and ensure the servomotor is correctly connected.
+## Hardware Setup
+The following diagram illustrates the connection between the Raspberry Pi and the servomotor:
 
+![schemeit_1 (1)](https://github.com/user-attachments/assets/f84ee2cd-88cf-4937-9d71-eb411d3aacb9)
+
+In this setup:
+- The 5V pin of the Raspberry Pi is connected to the + of the servo motor.
+- The GND pin is connected to the ground of the servo motor.
+- A GPIO pin (e.g., GPIO 25) is connected to the control input pin of the servo.
 ## Usage
 ### Running the server
 1. Navigate to the server directory and run:
