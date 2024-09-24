@@ -22,7 +22,7 @@ SmartGate is a client-server application that automates gate control by recogniz
 - Numpy
 - Face_recognition
 - Google Cloud Vision API
-- Google Cloud credentials file (platetextrecognition-7684c9cf2659.json)
+-  A Google Cloud credentials file 
 
 ## Installation
 1. Clone the repository:
