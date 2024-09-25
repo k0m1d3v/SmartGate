@@ -3,7 +3,7 @@ import requests
 import time
 
 # Indirizzo del server Flask
-SERVER_URL = "http://192.168.187.113:5000/process_image"
+SERVER_URL = "http://<your-servr-ip>:5000/process_image"
 
 
 def capture_and_send_image():
@@ -12,7 +12,7 @@ def capture_and_send_image():
         print("Errore nell'aprire la webcam")
         return
 
-    time_interval = 3.2  # Secondi tra un frame e l'altro
+    time_interval = 4  # Secondi tra un frame e l'altro
     last_capture_time = 0
 
     while True:
