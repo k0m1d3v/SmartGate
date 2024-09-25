@@ -12,10 +12,12 @@ app = Flask(__name__)
 
 # Percorso alla cartella dei volti conosciuti
 KNOWN_FACES_DIR = "known_faces"
+listaTarghe = []  # Lista per le targhe
 
 # Carica e codifica i volti conosciuti
 known_faces = []
 known_names = []
+
 
 def load_known_faces(folder_path):
     for filename in os.listdir(folder_path):
@@ -27,16 +29,20 @@ def load_known_faces(folder_path):
                 known_faces.append(encoding[0])
                 known_names.append(os.path.splitext(filename)[0])
 
+
 load_known_faces(KNOWN_FACES_DIR)
 print(f"Volti conosciuti caricati: {known_names}")
+
 
 # Funzione per filtrare solo caratteri alfanumerici
 def filter_alphanumeric(text):
     return re.sub(r'[^A-Za-z0-9]', '', text)
 
+
 # Configurazione Google Vision
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'platetextrecognition-7684c9cf2659.json'
 client = vision.ImageAnnotatorClient()
+
 
 # Riconoscimento targhe e volti dal frame ricevuto dal client
 @app.route('/process_image', methods=['POST'])
@@ -66,9 +72,10 @@ def process_image():
 
     # Rilevamento targhe
     plate_text = detect_license_plate_text(img)
-    listaTarghe = ["AB123CD"]
+
     # Prepara la risposta da inviare al client
     return jsonify({"Persona rilevata": face_names, "Targa rilevata": plate_text})
+
 
 # Funzione per il riconoscimento targhe con Google Vision
 def detect_license_plate_text(image):
@@ -105,11 +112,37 @@ def detect_license_plate_text(image):
 
     return None
 
+
 # Funzione per verificare se il testo è una targa valida
 def is_valid_license_plate(text):
     # Esempio: Controlla se la targa ha un formato specifico (es. 2 lettere, 3 numeri, 2 lettere)
     pattern = r'^[A-Z]{2}\d{3}[A-Z]{2}$'  # Modifica il pattern in base al formato delle tue targhe
     return bool(re.match(pattern, text))
+
+
+# Nuovo endpoint per caricare volti
+@app.route('/upload_face', methods=['POST'])
+def upload_face():
+    file = request.files['image']
+    filename = file.filename
+    # Salva l'immagine nella directory known_faces
+    file.save(os.path.join(KNOWN_FACES_DIR, filename))
+
+    # Ricarica i volti conosciuti dopo aver aggiunto la nuova immagine
+    load_known_faces(KNOWN_FACES_DIR)
+    return jsonify({"message": "Face uploaded successfully", "name": os.path.splitext(filename)[0]})
+
+
+# Nuovo endpoint per aggiungere targhe
+@app.route('/add_plate', methods=['POST'])
+def add_plate():
+    plate = request.json.get('plate')
+    if plate and is_valid_license_plate(plate):
+        listaTarghe.append(plate)
+        return jsonify({"message": "Plate added successfully", "plate": plate})
+    else:
+        return jsonify({"error": "Invalid plate format"}), 400
+
 
 # Avvia il server Flask
 if __name__ == '__main__':

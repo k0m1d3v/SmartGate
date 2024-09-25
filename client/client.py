@@ -3,7 +3,8 @@ import requests
 import time
 
 # Indirizzo del server Flask
-SERVER_URL = "http://127.0.0.1:5000/process_image"
+SERVER_URL = "http://192.168.187.113:5000/process_image"
+
 
 def capture_and_send_image():
     cap = cv2.VideoCapture(0)
@@ -11,7 +12,7 @@ def capture_and_send_image():
         print("Errore nell'aprire la webcam")
         return
 
-    time_interval = 5  # Secondi tra un frame e l'altro
+    time_interval = 3.2  # Secondi tra un frame e l'altro
     last_capture_time = 0
 
     while True:
@@ -27,9 +28,37 @@ def capture_and_send_image():
             # Codifica il frame come immagine JPEG
             _, img_encoded = cv2.imencode('.jpg', frame)
 
-            # Invia il frame al server Flask
-            response = requests.post(SERVER_URL, files={"image": img_encoded.tobytes()})
-            print(response.json())
+            try:
+                # Invia il frame al server Flask
+                response = requests.post(SERVER_URL, files={"image": img_encoded.tobytes()})
+
+                # Controlla lo stato della richiesta
+                if response.status_code == 200:
+                    # Prova ad accedere al JSON della risposta
+                    try:
+                        response_data = response.json()
+
+                        # Verifica che la risposta sia un dizionario
+                        if isinstance(response_data, dict):
+                            # Estrai i dati dal JSON
+                            face_names = response_data.get("Persona rilevata", [])
+                            plate_text = response_data.get("Targa rilevata")
+                            listTarghe = ["AB123CD"]
+                            if plate_text in listTarghe:
+                                print(f"Targa conosciuta: {plate_text}")
+                            else:
+                                print(f"Targa sconosciuta: {plate_text}")
+                            print(f"Volti rilevati: {face_names}")
+                        else:
+                            print("Formato della risposta JSON inatteso:", response_data)
+
+                    except ValueError:
+                        print("Errore nel decodificare il JSON della risposta.")
+                else:
+                    print(f"Errore nella richiesta: Status code {response.status_code}")
+
+            except requests.exceptions.RequestException as e:
+                print(f"Errore nella richiesta: {e}")
 
         # Mostra il video in tempo reale
         cv2.imshow('Client Webcam', frame)
@@ -40,6 +69,7 @@ def capture_and_send_image():
 
     cap.release()
     cv2.destroyAllWindows()
+
 
 if __name__ == "__main__":
     capture_and_send_image()

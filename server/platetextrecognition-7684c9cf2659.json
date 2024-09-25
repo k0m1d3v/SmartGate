@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "platetextrecognition",
+  "private_key_id": "7684c9cf26596885265f18bfc91cbcc6bddf9068",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC6o4zqvbIKMxF2\nnziZOdNll1oHwVdeMyik2fEQ5JOxGBzLEAzQcQZlyu90srsM7UIy49LnZAXB0lks\nFik0HCtnLjobWfyj/tqLnEZ5C2B9pReuhdaLsDWdPUXf4rasha68XIOTM7FDfQ76\nkjkoTWYVExLUgLw1xeaM1gJS1lDecvbNzrIaJGE5Vs5KJ7OKyY5HeJbh7m92wz/t\ne1aQRmxUakt6JXD+dtVuEdcZ1VSd82K0uG5scxKHT8AkeYF1ZjX/JOcpAzL34+Wp\nhmh2QfgQkWdLElHNfCxZCouTcGsJHEjXOfWu9qhPual7ovx0thlOXmfM+1U6O4Ok\niIZPtm+tAgMBAAECggEAIEZ4r75qq79dkX8izUKV909HWyh46JoduPZUbQiuLrWe\nAxKtOJ2XDuLbanmfBbMA2+aQegHOyhALaieR7AhEDDWPCFxVJ3ICzppRiIyqXMgA\nMqbD7YelGeI282rUDr0WdM3l1f6eNK7LeJLxTfImiVXxT2zMv1rQDgJTSAp2VSVO\nMlP+5JsqkDXezJy8LeSLu8Vi756r3EH0cJ+9BcatYxV4xbaBA3c0uvr5XLuV9OT7\nzyIUlApk066RTtduyW1ycVs4I8f2FJVWh3rYzDyzrtduYuO0F0JPNVqdFJYJVhUm\nzBxTFzCjtjqMiVUY4WN3hFaceqLJuwgOV0Ra2XNakQKBgQDkjNZr/Rv+4T93i4ZC\nre0SN3wUwPOHJEJ+QOULuysKfIC7S76/i3Hy0wGSOcpTKHKy86usmqYMSl6k2bKZ\nuz5H74dVNrPoGxhpqQRJJSCSnA2w7tO1Ij4NWhr/5vw4QXuFmGo9e9FFsbkuojAa\nvZl3xkzikKCOJl/L6hQxxDJVvQKBgQDRDhRXMwEYd0PAyUqk3S8H9OCoZLhlewZr\nP8k4XyscgJ31GiChT4FR/CNjViuS6t4ixBW22xRmrAAFVSO9mOlvt5uA279OSJsB\n00/LdKDNZnwJ1v5apNRuQT4KsexdYPsdBFx1KajLo6j3Z4+HwGv1O0meAniwDYKW\nNJuqUrxIsQKBgQCuySaSn5dxbUHkYsfi5rCPZe92z7lueMSBWY/RUOqxslWg52SR\niEs0sTpaYefhgOV3BfMcpYinjZij6fk0qIYQ7ZZKDPO5Zj9dTu0AI2ytsrqlvYAa\n3n0mKOrNGhF51Fpq6Q0WyEJbUneUumSfjrB3cSgLfR/Mlnxcrj+Tb8Au4QKBgQC5\nWdxa+9PK12Nw+Id/6MOcMFdHthVvlEY6rNFBc8+Lc9WYzNOFcjJceEr/9hSoLClL\ndcMy3scVyQYztCr+HSdLb+UluK/DPsiAM9SZtQwlUOpE5yOZRm86Wgoh/WJt4GCE\nd6tqDcek1bQntuAhIlAVm71HpTVQEopnlrk1qClb4QKBgGwNLHYnOXXLnTxHW3Kx\npfWzjvU3afVeYGOaMgOa6ztszF4dK56FPmrWaEadnsiBXuG/vmwKC+60yF4ZDK/I\n3z/SwqjDyYzESUk1kHm4CttH0i6UBpoU9atw73/s9Tb1GhLcoAejAt9S2TqX7fmy\nW+Tz3zSUK9i3V0ehKBo3Vhgp\n-----END PRIVATE KEY-----\n",
+  "client_email": "nikkio083@platetextrecognition.iam.gserviceaccount.com",
+  "client_id": "109896244480074989444",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/nikkio083%40platetextrecognition.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
