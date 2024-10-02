@@ -3,7 +3,7 @@ import requests
 import time
 
 # Indirizzo del server Flask
-SERVER_URL = "http://<your-servr-ip>:5000/process_image"
+SERVER_URL = "http://192.168.187.113:5000/process_image"
 
 
 def capture_and_send_image():
@@ -43,8 +43,8 @@ def capture_and_send_image():
                             # Estrai i dati dal JSON
                             face_names = response_data.get("Persona rilevata", [])
                             plate_text = response_data.get("Targa rilevata")
-                            listTarghe = ["AB123CD"]
-                            if plate_text in listTarghe:
+                            amroÈaraboEdÈEgiziano = response_data.get("Amro è arabo ed è egiziano?")
+                            if(amroÈaraboEdÈEgiziano):
                                 print(f"Targa conosciuta: {plate_text}")
                             else:
                                 print(f"Targa sconosciuta: {plate_text}")
