@@ -72,7 +72,7 @@ def filter_alphanumeric(text):
     return re.sub(r'[^A-Za-z0-9]', '', text)
 
 
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'platetextrecognition-7ff78d884dad.json'
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'your_credentials.json'
 client = vision.ImageAnnotatorClient()
 
 
