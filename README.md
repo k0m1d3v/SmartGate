@@ -52,7 +52,7 @@ Further features will be introduced, such as user group management, access contr
 ## Hardware Setup
 The following diagram illustrates the connection between the Arduino UNO and the servomotor:
 
-![schemeit_1 (1)](https://github.com/user-attachments/assets/f84ee2cd-88cf-4937-9d71-eb411d3aacb9)
+![Gate Diagram](SmartGateCircuit.png)
 
 In this setup:
 - The Arduino UNO is connected to the Raspberry Pi
