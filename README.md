@@ -1,5 +1,5 @@
 # SmartGate: Automated Gate Control with Face and License Plate Recognition
-SmartGate is a client-server application that automates gate control by recognizing faces and license plates. When a familiar face or license plate is detected, a signal is sent to a Raspberry Pi client to open the gate by controlling a servomotor.
+SmartGate is a client-server application that automates gate control by recognizing faces and license plates. When a familiar face or license plate is detected, a signal is sent to a Raspberry Pi client that sends another signal to an Arduinp UNO to open the gate by controlling a servomotor.
 
 ## Mobile Application Integration
 In addition to the core client-server functionality, we are developing a mobile application that allows users to manage faces and license plates remotely from a third device, such as a smartphone. The app will enable you to add new faces and license plates directly to the server database, with future plans to support removal and editing as well.
@@ -18,6 +18,7 @@ Further features will be introduced, such as user group management, access contr
 - Requests library (requests)
 - GPIO libraries for controlling the Raspberry Pi's servomotor (RPi.GPIO or pigpio)
 - A webcam connected to the Raspberry Pi
+- An Arduino UNO connected to the Raspberry Pi
 - A connected servomotor for gate control
 ### Server Side
 - Python 3.x
@@ -45,17 +46,19 @@ Further features will be introduced, such as user group management, access contr
    ```
 4. Add known faces:
    - Place images of known faces in the known_faces folder. Supported formats: .jpg, .png, .jpeg.
-5. Set up the Raspberry Pi for GPIO control:
-   - Install the necessary libraries for GPIO control (RPi.GPIO or pigpio), and ensure the servomotor is correctly connected.
+5. Set up the Arduino UNO for GPIO control:
+   - Connect the Arduino UNO to the Raspberry Pi and flash it with the code in the "Cancello" directory
+   - Ensure the servomotor is correctly connected.
 ## Hardware Setup
-The following diagram illustrates the connection between the Raspberry Pi and the servomotor:
+The following diagram illustrates the connection between the Arduino UNO and the servomotor:
 
 ![schemeit_1 (1)](https://github.com/user-attachments/assets/f84ee2cd-88cf-4937-9d71-eb411d3aacb9)
 
 In this setup:
-- The 5V pin of the Raspberry Pi is connected to the + of the servo motor.
+- The Arduino UNO is connected to the Raspberry Pi
+- The 5V pin of the Arduino UNO is connected to the + of the servo motor.
 - The GND pin is connected to the ground of the servo motor.
-- A GPIO pin (e.g., GPIO 25) is connected to the control input pin of the servo.
+- A GPIO pin (e.g., GPIO 9) is connected to the control input pin of the servo.
 ## Usage
 ### Running the server
 1. Navigate to the server directory and run:
