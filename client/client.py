@@ -2,57 +2,35 @@ import cv2
 import requests
 import time
 import threading
-import RPi.GPIO as GPIO
-
-# Imposta il pin di controllo del servo
-SERVO_PIN = 17  # Cambia il pin in base al collegamento del tuo servo
+import serial
 
 
-# Configurazione di base per il servo
-def setup_servo():
-    GPIO.setmode(GPIO.BCM)  # Imposta il modo BCM per i pin
-    GPIO.setup(SERVO_PIN, GPIO.OUT)
+# Configurazione della porta seriale (modifica 'COM3' per Windows o '/dev/ttyUSB0' su Linux)
+arduino = serial.Serial(port='/dev/ttyACM0', baudrate=9600, timeout=1)
 
-    # Crea un oggetto PWM sul pin del servo a 50Hz (frequenza standard per i servi)
-    pwm = GPIO.PWM(SERVO_PIN, 50)
-    pwm.start(0)  # Inizializza il servo con un duty cycle di 0
-    return pwm
-
-
-# Funzione per aprire il cancello (ruotare il servo di almeno 720 gradi)
-def apri_cancello(pwm):
-    print("Apertura del cancello...")
-    pwm.ChangeDutyCycle(7)  # Modifica il duty cycle per ruotare il servo in una direzione
-    time.sleep(4)  # Attendere il tempo necessario per ruotare di 720 gradi
-    pwm.ChangeDutyCycle(0)  # Ferma il servo
-    print("Cancello aperto!")
-
-
-# Funzione per chiudere il cancello (ruotare il servo nella direzione opposta per 720 gradi)
-def chiudi_cancello(pwm):
-    print("Chiusura del cancello...")
-    pwm.ChangeDutyCycle(5)  # Modifica il duty cycle per ruotare il servo nella direzione opposta
-    time.sleep(4)  # Attendere il tempo necessario per ruotare di 720 gradi
-    pwm.ChangeDutyCycle(0)  # Ferma il servo
-    print("Cancello chiuso!")
-
-
-# Funzione per pulire i pin GPIO alla fine
-def cleanup_servo():
-    GPIO.cleanup()
+def send_boolean_to_arduino(state):
+    # Converti lo stato booleano in una stringa e inviala tramite seriale
+    if state:
+        arduino.write(b'1')  # Invia '1' se True
+    else:
+        arduino.write(b'0')  # Invia '0' se False
 
 # Indirizzo del server Flask
-SERVER_URL = "http://192.168.1.19:5000/process_image"
+SERVER_URL = "http://<your-server-ip>:5000/process_image"
 Active = False
+
+
+
 def start_timer(n):
     global Active
     Active = True
     def timer():
         global Active
         print(f"Cancello in apertura per {n} secondi")
+        send_boolean_to_arduino(True)
         time.sleep(n)
+        send_boolean_to_arduino(False)
         print("Cancello in chiusura!")
-        time.sleep(5)
         Active = False
 
     timer_thread = threading.Thread(target=timer)
@@ -97,14 +75,19 @@ def capture_and_send_image():
                             # Estrai i dati dal JSON
                             face_names = response_data.get("Persona rilevata", [])
                             plate_text = response_data.get("Targa rilevata")
-                            amroÈaraboEdÈEgiziano = response_data.get("Amro è arabo ed è egiziano?")
-                            if(amroÈaraboEdÈEgiziano):
+                            TargaisActive = response_data.get("Targa is active?")
+                            if(TargaisActive):
                                 print(f"Targa conosciuta: {plate_text}")
                             else:
                                 print(f"Targa sconosciuta: {plate_text}")
                             print(f"Volti rilevati: {face_names}")
-                            if face_names != "Sconosciuto" and face_names != "" and not Active or amroÈaraboEdÈEgiziano:
-                                start_timer(15)
+                            if not Active:
+                                if face_names != [] or TargaisActive:
+                                    if "Sconosciuto" not in face_names or TargaisActive:
+                                        start_timer(10)
+                                    
+
+
                         else:
                             print("Formato della risposta JSON inatteso:", response_data)
 
