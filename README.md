@@ -16,7 +16,7 @@ Further features will be introduced, such as user group management, access contr
 - Python 3.x
 - OpenCV (cv2)
 - Requests library (requests)
-- GPIO libraries for controlling the Raspberry Pi's servomotor (RPi.GPIO or pigpio)
+- Serial library for controlling the Raspberry Pi's servomotor
 - A webcam connected to the Raspberry Pi
 - An Arduino UNO connected to the Raspberry Pi
 - A connected servomotor for gate control
