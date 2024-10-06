@@ -1,10 +1,10 @@
 # SmartGate: Automated Gate Control with Face and License Plate Recognition
 SmartGate is a client-server application that automates gate control by recognizing faces and license plates. When a familiar face or license plate is detected, a signal is sent to a Raspberry Pi client to open the gate by controlling a servomotor.
 
-##Mobile Application Integration
+## Mobile Application Integration
 In addition to the core client-server functionality, we are developing a mobile application that allows users to manage faces and license plates remotely from a third device, such as a smartphone. The app will enable you to add new faces and license plates directly to the server database, with future plans to support removal and editing as well.
 
-Further features will be introduced, such as user group management, access control, and more. Stay tuned for updates, and find the mobile app repository here: .
+Further features will be introduced, such as user group management, access control, and more. Stay tuned for updates, and find the mobile app repository here: [[https://github.com/Nikkio083/SmartGateApp]].
 ## Features
 - Real-time face recognition using a database of known faces.
 - License plate recognition using Google Cloud Vision API.
