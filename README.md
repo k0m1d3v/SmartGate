@@ -37,7 +37,10 @@ Further features will be introduced, such as user group management, access contr
    ```
 2. Install the required Python libraries:
    ```bash
-   pip install -r requirements.txt
+   FOR LINUX:
+   ./LibrariesInstaller.sh
+   FOR WINDOWS:
+   Double click on the file.
    ```
 3. Set up your Google Cloud credentials:
    - Ensure you have your GOOGLE_APPLICATION_CREDENTIALS file, and set the environment variable
